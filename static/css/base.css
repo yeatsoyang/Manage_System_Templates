@@ -1,11 +1,11 @@
 .Layout-Header{
-    #background-color:#0b9e9d;
+    background-color:#0b9e9d;
     height:50px;
     position:relative;
-	background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
+	#background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
+    #background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
+    #background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
+    #background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
 }
 
 .Layout-Main{
@@ -16,7 +16,7 @@
     background-color:#333;
     position:absolute;
     width: 240px;
-    height: 100%;
+    height: 106%;
 }
 
 .Layout-Main .right{
@@ -27,16 +27,16 @@
 }
 
 .Sys-Image{
-    #background-color:#0b9e9d;
+    background-color:#0b9e9d;
     width: 240px;
     height: 100%;
     position: absolute;
     text-align: center;
 
-	background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
+	#background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
+    #background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
+    #background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
+    #background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
 }
 
 

@@ -6,7 +6,7 @@ var Notification = require("./notification.js");
 var UserInfo = require("./user.js");
 
 
-var RefundManager = require("./refund-manager.js");
+var UserManager = require("./user-manager.js");
 
 
 
@@ -56,7 +56,7 @@ class UIndex extends React.Component {
         );
         switch (module_id){
          case '1':
-             content = (<RefundManager/>) ;
+             content = (<UserManager/>) ;
              break;
          default:
              content = (
