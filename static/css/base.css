@@ -1,0 +1,314 @@
+.Layout-Header{
+    #background-color:#0b9e9d;
+    height:50px;
+    position:relative;
+	background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
+}
+
+.Layout-Main{
+    position:relative;
+}
+
+.Layout-Main .left{
+    background-color:#333;
+    position:absolute;
+    width: 240px;
+    height: 100%;
+}
+
+.Layout-Main .right{
+    margin-left:240px;
+    height:90%;
+    background-color:white;
+    position: relative;
+}
+
+.Sys-Image{
+    #background-color:#0b9e9d;
+    width: 240px;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+
+	background: -webkit-linear-gradient(#11dde4, #adececa); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#11dde4, #adecec); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#11dde4, #adecec); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#11dde4, #adecec); /* 标准的语法（必须放在最后） */
+}
+
+
+.Sys-Image .sys-name-bg{
+    width: 240px;
+    height: 40px;
+    top: 10px;
+    position: absolute;
+}
+
+
+.Sys-Image span{
+    color:white;
+    font-size:23px;
+}
+
+
+.Notification{
+    right: 70px;
+    position: absolute;
+    top:20%;
+}
+
+
+.notification-bg{
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    background: #eee;
+    display: inline-block;
+    text-align: -webkit-center;
+    font-size: 15px
+}
+
+
+
+.User-Setting{
+    right:20;
+    position:absolute;
+    top:20%;
+}
+
+
+.User-Info{
+    position: absolute;
+    right: 121px;
+    top: 13px;
+    color: white;
+    font-size: 18px;
+}
+
+
+.Advance-Search{
+   width:95%;
+   margin-bottom: 20px;
+}
+
+.Table{
+   margin-top:15px;
+}
+
+
+.Modal-Form {
+    
+}
+
+
+.Button-Group{
+   margin-left:10px;
+}
+
+
+.File-Upload{
+    position:relative;
+	margin-top:10px;
+}
+
+
+
+.File-Commit{
+    position: absolute;
+    left: 225px;
+    bottom: 0px;
+}
+
+
+.Form-Content{
+    display: -webkit-inline-box;
+    width: 382px;
+    margin-left: 30px;
+    margin-right: -80px;
+}
+
+
+
+.Form-Div{
+    margin-top: 37px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+
+.Form-Comfirm{
+    position: fixed;
+    margin-left: 703px;
+	margin-top: -22px;
+}
+
+
+.Form-Close {
+    margin-left: 752px;
+}
+
+
+.Import-tips{
+    color:red;
+	margin-top:10px;
+	margin-left:10px;
+}
+
+
+/*
+遮罩层
+*/
+.Cover {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background-color: #999;
+    height: 100%;
+    align-content: center;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+}
+
+
+
+.Cover .img{
+    width: 100;
+    margin-left: 50%;
+    margin-top: 400px;
+}
+
+
+
+.Login-Form{
+    position: absolute;
+    top: 55px;
+    left: 42%;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+
+
+
+.Statics-Left{
+    width: 300px;
+    background-color:rgba(232, 241, 234, 0.49);
+    height: 95%;
+    margin-top: -15px;
+}
+
+
+
+.Statics-Tab{
+    
+}
+
+
+
+.Statics-Right{
+    background-color: white;
+    margin-left: 300px;
+    top: 37px;
+    position: absolute;
+    width: 100%;
+    height: 96%;
+}
+
+
+
+.Search-i{
+    height:10px;
+	margin-left:30px;
+}
+
+
+
+
+.Search-r{
+    margin-top: 40px;
+    margin-left: 23px;
+    background-color: rgba(232, 241, 234, 0.49);
+    width: 270px;
+    max-height: 95%;
+    min-height: 95%;
+	overflow-y:auto;
+}
+
+
+
+
+.Search-rl{
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #f1e4ba;
+    border-radius: 4px;
+	cursor: pointer;
+}
+
+
+
+.Search-rl1{
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color:#afb3af;
+    border-radius: 4px;
+	cursor: pointer;
+}
+
+
+.R-SearchC{
+    font-size: 16px;
+    margin-left: 6px;
+}
+
+
+.Counts{
+    color:red
+}
+
+.Rs-Table{
+    width: 80%;
+}
+
+
+
+
+
+/*
+ 嵌套表格
+*/
+.components-table-demo-nested .ant-table-expanded-row > td:last-child {
+  padding: 0 48px 0 8px;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-thead th {
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-thead th:first-child {
+  padding-left: 0;
+}
+
+.components-table-demo-nested .ant-table-expanded-row > td:last-child .ant-table-row td:first-child {
+  padding-left: 0;
+}
+
+.components-table-demo-nested .ant-table-expanded-row .ant-table-row:last-child td {
+  border: none;
+}
+
+.components-table-demo-nested .ant-table-expanded-row .ant-table-thead > tr > th {
+  background: none;
+}
+
+.components-table-demo-nested .table-operation a:not(:last-child) {
+  margin-right: 24px;
+}

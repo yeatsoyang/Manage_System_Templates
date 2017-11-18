@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="zh-CN"/>
+        <title>聊天室</title>
+        <link rel="stylesheet" href="./static/css/bootstrap.css">
+        <script type="text/javascript" src="./static/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+		$(document).ready(function(){
+            if ("WebSocket" in window) {
+                ws = new WebSocket("ws://" + document.domain + ":7000/ws");
+                ws.onmessage = function (msg) {
+                    var message = JSON.parse(msg.data);
+                    $("span#c").html(message.message);
+                };
+                // Bind send button to websocket
+                $("#send").bind('click',function(){
+					var dt = $("#say").val();
+				    ws.send(JSON.stringify({'text':dt}));
+				})
+
+                // Cleanly close websocket when unload window
+                window.onbeforeunload = function() {
+                    ws.onclose = function () {}; // disable onclose handler first
+                    ws.close()
+                };
+            };
+
+
+			$("#refresh").bind('click',function(){
+			    $.post("./test_post", {}, function(data){
+                    console.log(data)
+                });
+			})
+
+
+        });
+
+        </script>
+    </head>
+    <body>
+        <div class="header container">
+            <h1>聊天室</h1>
+			<div>
+			    系统消息:
+				<div style="background-color:#f96833">
+                    <span id="c">测试公告</span>
+				</div>
+			</div>
+        </div>
+        <div class="container" style="margin-top:10px">
+		    <div style="width: 514px;background-color: #d4e4d4;position: absolute;">
+			    <div>
+					<form class="row" id="message_form">
+						<div class="span10">
+							<div class="clearfix">
+								<label for="chat_content">消息输入框</label>
+								<div class="input">
+									<textarea id="say" name="content" class="xlarge" style="max-width: 500px;max-height:150px;min-width: 500px;min-height: 150px;" rows="6"></textarea>
+								</div>			
+							</div>
+							<div class="">
+								<input type="button" class="btn primary" id="send"  value="发布">
+								&nbsp;
+								<input type="reset" class="btn" value="清空">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div>
+				   消息列表
+
+				   <div style="min-height:300px;background-color:darkgrey;max-height:300px;overflow-y:auto;">
+				        <span  style="display:block;margin-top:5px">消息1......<span style="margin-left: 50px;">来自好友1</span></span>
+						<span  style="display:block;margin-top:5px">消息2......<span style="margin-left: 50px;">来自好友3</span></span>
+						<span  style="display:block;margin-top:5px">消息3......<span style="margin-left: 50px;">来自好友2</span></span>
+						<span  style="display:block;margin-top:5px">消息4......<span style="margin-left: 50px;">来自好友1</span></span>
+				   </div>
+				</div>
+			</div>
+			<div style="position: relative;margin-left: 527px;background-color: #e2e2ec;">
+			    
+				聊天对象
+				<a href="#" id="refresh">更新好友列表</a>
+				<div style="background-color: #e2e2ec;height: 546px;overflow: auto;">
+					<a  style="display:block;cursor: pointer;margin-top:5px">好友1......</a>
+					<a  style="display:block;cursor: pointer;margin-top:5px">好友2......</a>
+					<a  style="display:block;cursor: pointer;margin-top:5px">好友3......</a>
+					<a  style="display:block;cursor: pointer;margin-top:5px">好友4......</a>
+				</div>
+			</div>
+        </div>
+
+    </body>
+</html>
