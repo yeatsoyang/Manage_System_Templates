@@ -18,7 +18,8 @@ flaskapp.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
 blueprints = (
-    ('idx.views.idx_bp', '/idx'),
+    ('idx.idx_views.idx_bp', '/idx'),
+    ('user.user_views.user_bp', '/user'),
 )
 
 
@@ -88,13 +89,18 @@ def test_post():
 
 
 
+
+
+
+
+
+
 def _run_paste():
     host = ('0.0.0.0', 7000)
     from paste import httpserver
     _app = flaskapp
     _app.debug = True
     httpserver.serve(_app.wsgi_app, host=host[0], port=host[1])
-
 
 
 if __name__ == '__main__':
