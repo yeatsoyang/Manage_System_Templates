@@ -117,11 +117,27 @@ class Connection(object):
         finally:
             cursor.close()
 
-    def query(self, query, *parameters):
+    def query(self,query, *parameters):
         """Returns a row list for the given query and parameters."""
         cursor = self._cursor()
         try:
-            self._execute(cursor, query, parameters)
+            self._execute(cursor,query,parameters)
+            column_names = [d[0] for d in cursor.description]
+            return [Row(itertools.izip(column_names, row)) for row in cursor]
+        finally:
+            cursor.close()
+
+
+
+    def query_pagination(self,query,paginator,*parameters):
+        """Returns a pagination row list for the given query and parameters."""
+        cursor = self._cursor()
+        try:
+            start_num = (paginator['page_number']-1)*paginator['page_size']
+            page_size = paginator['page_size']
+            query = query + " ORDER BY "+str(paginator['key_id'])+""\
+                    " DESC LIMIT "+str(start_num)+","+str(page_size)+""
+            self._execute(cursor,query,parameters)
             column_names = [d[0] for d in cursor.description]
             return [Row(itertools.izip(column_names, row)) for row in cursor]
         finally:
@@ -201,6 +217,10 @@ class Connection(object):
             self.close()
             raise
 
+
+
+
+
 class TableQueryer:
     '''
     Support for single table simple querys
@@ -226,6 +246,10 @@ class TableQueryer:
     def __getattr__(self,field_name):
         return conds(field_name)
 
+
+
+
+
 class Operater:
     def __init__(self,db,tablename,query):
         self.insert=Insert(db,tablename)
@@ -233,6 +257,10 @@ class Operater:
         self.select=Select(db,tablename,query)
         self.update=Update(db,tablename,query)
         self.delete=Delete(db,tablename,query)
+
+
+
+
 
 class Count (object):
     '''
@@ -252,6 +280,8 @@ class Count (object):
             _sql="",join(["SELECT count(1) FROM ",self.tablename])
             return self.db.count(_sql)
 
+
+
 class Select:
     '''
     Select list with current where clouse 
@@ -265,21 +295,29 @@ class Select:
         self._fields=[]
         self._groups=[]
         self._having=None
+
         
+
     def sort(self,**fields):
         del self._sort_fields[:]
         for key in fields.keys():
             self._sort_fields.append("".join(["`",key,"` ",fields[key]]))
         return self
 
+
+
     def limit(self,start,count):
         self._limit="".join(["LIMIT ",str(start),",",str(count)])
         return self
+
+
 
     def collect(self,*fields):
         if len(fields):
             self._fields+=fields
         return self        
+
+
 
     def group_by(self,*fields):
         if len(fields)<1:
@@ -287,8 +325,12 @@ class Select:
         for f in fields:
             self._groups.append(f)
 
+
+
     def having(self,cond):
         self._having=cond
+
+
 
     def __getslice__(self,pid,pcount):
         if pid<1:
@@ -298,6 +340,8 @@ class Select:
         _start=(pid-1)*pcount
         self._limit="".join(["LIMIT ",str(_start),",",str(pcount)])
         return self
+
+
 
     def get_sql(self):
         _sql_slice=["SELECT "]
@@ -341,10 +385,14 @@ class Select:
             _sql_slice.append(self._limit)
         return "".join(_sql_slice)
     
+
+
     def _add_tb(self,tn,src):
         import re
         p=compile(r'`(\w*?)`')
         return p.sub(r'`%s.\1`'%tn,src)
+
+
 
     def __call__(self):
         _sql=self.get_sql()
@@ -362,6 +410,9 @@ class Select:
             return self.db.query(_sql,*_plist)
         else:
             return self.db.query(_sql)
+
+
+
 
 class Update:
     '''
@@ -390,6 +441,9 @@ class Update:
         _sql="".join(_sql_slice)
         return self.db.execute(_sql,*_params)
 
+
+
+
 class Delete:
     def __init__(self,db,tablename,where):
         self.db=db
@@ -403,6 +457,10 @@ class Delete:
             _sql_slice.append(self._where.get_sql())
             _sql="".join(_sql_slice)
             return self.db.execute(_sql,self._where.get_params())
+
+
+
+
 
 class Insert:
     '''
@@ -421,6 +479,10 @@ class Insert:
         _params=[fileds[key] for key in columns]
         return self.db.execute(_sql,*tuple(_params))
 
+
+
+
+
 class Row(dict):
     """A dict that allows for object-like property access syntax."""
     def __getattr__(self, name):
@@ -428,6 +490,8 @@ class Row(dict):
             return self[name]
         except KeyError:
             raise AttributeError(name)
+
+
 
 
 class conds:

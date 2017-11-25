@@ -17,7 +17,12 @@ def get_tconn():
     return db
 
 
+
 def close_tconn(db):
     db.close()
 
 
+
+
+def db_commit(db):
+    db.commit()

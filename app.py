@@ -16,10 +16,14 @@ flaskapp = Flask(__name__, template_folder='templates')
 flaskapp.debug = True
 flaskapp.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+from db import db_conn,db_func
+from role import role_model
+
 
 blueprints = (
     ('idx.idx_views.idx_bp', '/idx'),
     ('user.user_views.user_bp', '/user'),
+    ('role.role_views.role_bp', '/role'),
 )
 
 
@@ -50,26 +54,20 @@ def idx():
 
 @flaskapp.route('/get_menus',methods=['GET','POST'])
 def get_menus():
+    role = role_model.Role()
+    _db = db_conn.get_tconn()
     from utils.conf import Menus 
-    from utils.conf import Role_Menus 
     menus = Menus['menus']
-    # 1 管理员  2 领导  3 秘书(2、3 角色菜单一致) 4 履行人
-    role_types = []
-    #role_types.append(session['roletype'])
-    role_types = [1,2,3,4,5]
-    role_menus = Role_Menus
-    menu_list = []
-    for r in role_types:
-        for r1 in role_menus:
-            if r == r1['role']:menu_list = menu_list + r1['menus']
-    menu_list = list(set(menu_list))
+    role_ids = ['1']
+    menu_list = role.query_role_menus(_db,role_ids)
     for menu in menus:
         c = []
         for sub_menus in menu['children']:
             if int(sub_menus['key']) in menu_list:
                c.append(sub_menus)
         menu['children'] = c
-    return json.dumps(menus,ensure_ascii=False)
+    return jsonify(menus)
+    #return json.dumps(menus,ensure_ascii=False)
 
 
 
